@@ -41,6 +41,7 @@ data/*/clean/*
 data/Organizational capital_fishing organizations Mex/*
 data/maximum_daily_liters.csv
 *.zip
+*.DS_Store
 
 !data/raw/**/
 !dat/aclean/*
