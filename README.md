@@ -6,7 +6,7 @@
 
 ### "Clean" data vailability, with two different levels of processing
 
-- L1 data (not recommended): Monthly CSV files are available in the `data/mex_vms/clean/` and on Google Cloud storage at: `gs://mex_fisheries/MEX_VMS/*`
+- L1 data (not recommended): Monthly CSV files are available in the `data/clean/` and on Google Cloud storage at: `gs://mex_fisheries/MEX_VMS/*`
 - L1 and L2 data (recommended): On Google BigQuery at: `mex-fisheries.mex_vms.mex_vms_latest`, as a partitioned table (by year) and some level of processing with added features.
 
 Note that BigQuery data use a standard versioning system every time the tables undergo a major change, like fixing bugs, adding data, or modifying the underlying cleaning code. Past versions include:
@@ -47,4 +47,4 @@ mex_vms |>
     collect()
 ```
 
-_NOTE: For details on the data cleaning, next steps, and know issues, see the dedicated [README](/scripts/mex_vms). File may not be up to date_
+_NOTE: For details on the data cleaning, next steps, and know issues, see the dedicated [README](/scripts). File may not be up to date_
