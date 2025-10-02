@@ -38,30 +38,30 @@ Note that BigQuery data use a standard versioning system every time the tables u
 
 Available columns are:
 
-- **vessel_rnpa**: Descriptions to be added
-- **name**: Descriptions to be added
-- **port**: Descriptions to be added
-- **economic_unit**: Descriptions to be added
-- **src**: Descriptions to be added
-- **seg_id**: Descriptions to be added
-- **point_in_seg**: Descriptions to be added
-- **datetime**: Descriptions to be added
-- **lat**: Descriptions to be added
-- **lon**: Descriptions to be added
-- **sea**: Descriptions to be added
-- **eez**: Descriptions to be added
-- **mpa**: Descriptions to be added
-- **fishing_region**: Descriptions to be added
-- **distance_from_port_m**: Descriptions to be added
-- **distance_from_shore_m**: Descriptions to be added
-- **depth_m**: Descriptions to be added
-- **reported_speed**: Descriptions to be added
-- **course**: Descriptions to be added
-- **year**: Descriptions to be added
-- **month**: Descriptions to be added
-- **distance_to_last_m**: Descriptions to be added
-- **hours**: Descriptions to be added
-- **implied_speed_knots**: Descriptions to be added
+- **vessel_rnpa**: Character. Vessel RNPA - Unique 8-digit identifier for the vessel.
+- **name**: Character. Vessel name - Name of the vessel, as reported in the VMS data.
+- **port**: Character. Port - Port of registration of the vessel, as reported in the VMS data.
+- **economic_unit**: Character. Economic unit RNPA - Unique 8-digit identifier for the economic unit associated with the vessel, as per the latest available vessel registry.
+- **src**: Character. Source file - Name of the source file from which the data point was extracted.
+- **seg_id**: Integer. Segment ID - Identifier for the segment to which the data point belongs, based on speed and time thresholds.
+- **point_in_seg**: Integer. Point in segment - Position of the data point within its segment.
+- **datetime**: Timestamp. Date and time - Timestamp of the data point, in UTC.
+- **lat**: Numeric. Latitude - Latitude of the vessel at the time of the data point.
+- **lon**: Numeric. Longitude - Longitude of the vessel at the time of the data point.
+- **sea**: Character. Sea - Name of the sea where the vessel was located at the time of the data point.
+- **eez**: Character. Exclusive Economic Zone - Name of the EEZ where the vessel was located at the time of the data point.
+- **mpa**: Character. Marine Protected Area - Name of the MPA where the vessel was located at the time of the data point, if applicable.
+- **fishing_region**: Character. Fishing region - Name of the fishing region where the vessel was located at the time of the data point.
+- **distance_from_port_m**: Numeric. Distance from port (meters) - Distance of the vessel from the nearest port at the time of the data point.
+- **distance_from_shore_m**: Numeric. Distance from shore (meters) - Distance of the vessel from the nearest shore at the time of the data point.
+- **depth_m**: Numeric. Depth (meters) - Depth of the water at the vessel's location at the time of the data point.
+- **reported_speed**: Numeric. Reported speed (knots) - Speed of the vessel as reported in the VMS data.
+- **course**: Numeric. Course (degrees) - Course of the vessel as reported in the VMS data.
+- **year**: Numeric. Year - Year of the data point.
+- **month**: Numeric. Month - Month of the data point.
+- **distance_to_last_m**: Numeric. Distance to last point (meters) - Distance from the previous data point in the segment.
+- **hours**: Numeric. Hours - Time difference from the previous data point in the segment, in hours.
+- **implied_speed_knots**: Numeric. Implied speed (knots) - Speed calculated based on the distance to the last point and the time difference.
 
 
 ## Accessing the data via R
