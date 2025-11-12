@@ -1,5 +1,7 @@
 # Vessel Tracking Data from Mexico's Vessel Monitoring System (VMS)
 
+[![DOI](https://zenodo.org/badge/1046400826.svg)](https://doi.org/10.5281/zenodo.17592443)
+
 ## About
 
 The raw data come from [Datos abiertos](https://datos.gob.mx/busca/dataset/localizacion-y-monitoreo-satelital-de-embarcaciones-pesqueras).
