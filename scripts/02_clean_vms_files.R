@@ -107,7 +107,7 @@ land <- ne_countries(scale = "small",
   st_union()
 
 # Cleaning function 
-clean_vms <- function(data, out_dir = here("data/mex_vms/clean")) {
+clean_vms <- function(data, out_dir = here("data/clean")) {
   # browser()
   # Checks ---------------------------------------------------------------------
   # Check that directory exists
@@ -171,7 +171,7 @@ clean_vms <- function(data, out_dir = here("data/mex_vms/clean")) {
 # Identify files ---------------------------------------------------------------
 paths <-
   list.files(
-    path = here("data", "mex_vms", "raw"),
+    path = here("data", "raw"),
     recursive = T,
     pattern = "*\\.csv|*\\.CSV",
     full.names = T
@@ -224,6 +224,3 @@ metadata %>%
   future_walk(.f = clean_vms)
 
 plan(sequential)
-
-## EXPORT ######################################################################
-system(paste0("date >> ", here::here("data", "mex_vms", "clean", "clean.log")))
