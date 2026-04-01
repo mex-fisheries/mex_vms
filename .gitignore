@@ -45,3 +45,4 @@ data/maximum_daily_liters.csv
 
 !data/raw/**/
 !dat/aclean/*
+.positai

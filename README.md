@@ -40,30 +40,30 @@ Note that BigQuery data use a standard versioning system every time the tables u
 
 Available columns are:
 
-- **vessel_rnpa**: Character. Vessel RNPA - Unique 8-digit identifier for the vessel.
-- **name**: Character. Vessel name - Name of the vessel, as reported in the VMS data.
-- **port**: Character. Port - Port of registration of the vessel, as reported in the VMS data.
-- **economic_unit**: Character. Economic unit RNPA - Unique 8-digit identifier for the economic unit associated with the vessel, as per the latest available vessel registry.
-- **src**: Character. Source file - Name of the source file from which the data point was extracted.
-- **seg_id**: Integer. Segment ID - Identifier for the segment to which the data point belongs, based on speed and time thresholds.
-- **point_in_seg**: Integer. Point in segment - Position of the data point within its segment.
-- **datetime**: Timestamp. Date and time - Timestamp of the data point, in UTC.
-- **lat**: Numeric. Latitude - Latitude of the vessel at the time of the data point.
-- **lon**: Numeric. Longitude - Longitude of the vessel at the time of the data point.
-- **sea**: Character. Sea - Name of the sea where the vessel was located at the time of the data point.
-- **eez**: Character. Exclusive Economic Zone - Name of the EEZ where the vessel was located at the time of the data point.
-- **mpa**: Character. Marine Protected Area - Name of the MPA where the vessel was located at the time of the data point, if applicable.
-- **fishing_region**: Character. Fishing region - Name of the fishing region where the vessel was located at the time of the data point.
-- **distance_from_port_m**: Numeric. Distance from port (meters) - Distance of the vessel from the nearest port at the time of the data point.
-- **distance_from_shore_m**: Numeric. Distance from shore (meters) - Distance of the vessel from the nearest shore at the time of the data point.
-- **depth_m**: Numeric. Depth (meters) - Depth of the water at the vessel's location at the time of the data point.
-- **reported_speed**: Numeric. Reported speed (knots) - Speed of the vessel as reported in the VMS data.
-- **course**: Numeric. Course (degrees) - Course of the vessel as reported in the VMS data.
-- **year**: Numeric. Year - Year of the data point.
-- **month**: Numeric. Month - Month of the data point.
-- **distance_to_last_m**: Numeric. Distance to last point (meters) - Distance from the previous data point in the segment.
-- **hours**: Numeric. Hours - Time difference from the previous data point in the segment, in hours.
-- **implied_speed_knots**: Numeric. Implied speed (knots) - Speed calculated based on the distance to the last point and the time difference.
+- `vessel_rnpa`: Character. Vessel RNPA - Unique 8-digit identifier for the vessel.
+- `name`: Character. Vessel name - Name of the vessel, as reported in the VMS data.
+- `port`: Character. Port - Port of registration of the vessel, as reported in the VMS data.
+- `economic_unit`: Character. Economic unit RNPA - Unique 8-digit identifier for the economic unit associated with the vessel, as per the latest available vessel registry.
+- `src`: Character. Source file - Name of the source file from which the data point was extracted.
+- `seg_id`: Integer. Segment ID - Identifier for the segment to which the data point belongs, based on speed and time thresholds.
+- `point_in_seg`: Integer. Point in segment - Position of the data point within its segment.
+- `datetime`: Timestamp. Date and time - Timestamp of the data point, in UTC.
+- `lat`: Numeric. Latitude - Latitude of the vessel at the time of the data point.
+- `lon`: Numeric. Longitude - Longitude of the vessel at the time of the data point.
+- `sea`: Character. Sea - Name of the sea where the vessel was located at the time of the data point.
+- `eez`: Character. Exclusive Economic Zone - Name of the EEZ where the vessel was located at the time of the data point.
+- `mpa`: Character. Marine Protected Area - Name of the MPA where the vessel was located at the time of the data point, if applicable.
+- `fishing_region`: Character. Fishing region - Name of the fishing region where the vessel was located at the time of the data point.
+- `distance_from_port_m`: Numeric. Distance from port (meters) - Distance of the vessel from the nearest port at the time of the data point.
+- `distance_from_shore_m`: Numeric. Distance from shore (meters) - Distance of the vessel from the nearest shore at the time of the data point.
+- `depth_m`: Numeric. Depth (meters) - Depth of the water at the vessel's location at the time of the data point.
+- `reported_speed`: Numeric. Reported speed (knots) - Speed of the vessel as reported in the VMS data.
+- `course`: Numeric. Course (degrees) - Course of the vessel as reported in the VMS data.
+- `year`: Numeric. Year - Year of the data point.
+- `month`: Numeric. Month - Month of the data point.
+- `distance_to_last_m`: Numeric. Distance to last point (meters) - Distance from the previous data point in the segment.
+- `hours`: Numeric. Hours - Time difference from the previous data point in the segment, in hours.
+- `implied_speed_knots`: Numeric. Implied speed (knots) - Speed calculated based on the distance to the last point and the time difference.
 
 
 ## Accessing the data via R
@@ -85,17 +85,18 @@ bq_auth("juancarlos.villader@gmail.com") # You'll need to authenticate using you
 con <- dbConnect(bigquery(),
                  project = "mex-fisheries", # This is the name of the project, leave it as-is
                  dataset = "mex_vms",       # This is the name of the dataset, leave it as-is
+                 billing = "mex-fisheries", # This indicates the billing project. You'll need to use your own
                  use_legacy_sql = FALSE, 
                  allowLargeResults = TRUE)
-  
+
 mex_vms <- tbl(con, "mex_vms_processed_latest") # This object now contains a tbl that points at mex_vms_processed_v_20250319
 
 # That's it, you can now use dplyr verbs to work with the data.
 # For example, get latitude, longitude, and vessel id for the first 1000 rows in the data
 mex_vms |> 
-    select(vessel_rnpa, lat, lon) |> 
-    head(1000) |> 
-    collect()
+  select(vessel_rnpa, lat, lon) |> 
+  head(1000) |> 
+  collect()
 ```
 
 ## Known issues
