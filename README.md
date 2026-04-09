@@ -2,9 +2,27 @@
 
 [![DOI](https://zenodo.org/badge/1046400826.svg)](https://doi.org/10.5281/zenodo.17592443)
 
+## Citation
+
+If you use these data, please cite:
+
+Villaseñor-Derbez, J. C., & Longnecker, A. (2025). mex-fisheries/mex_vms (v0.0.1). Zenodo. https://doi.org/10.5281/zenodo.17592443
+
+```bibtex
+@software{villasenor-derbez_2025_mex_vms,
+  author       = {Villaseñor-Derbez, Juan Carlos and Longnecker, Aubriana},
+  title        = {mex-fisheries/mex\_vms},
+  year         = {2025},
+  publisher    = {Zenodo},
+  version      = {v0.0.1},
+  doi          = {10.5281/zenodo.17592443},
+  url          = {https://doi.org/10.5281/zenodo.17592443}
+}
+```
+
 ## About
 
-The raw data come from [Datos abiertos](https://datos.gob.mx/busca/dataset/localizacion-y-monitoreo-satelital-de-embarcaciones-pesqueras).
+The raw data come from [Datos abiertos](https://www.datos.gob.mx/dataset/localizacion_monitoreo_satelital_embarcaciones_pesqueras_2025).
 These data are collected and curated by Mexico's [`SISMEP`](https://www.gob.mx/conapesca/acciones-y-programas/sistema-de-monitoreo-satelital-de-embarcaciones-pesqueras)
 (Sistema de Monitoreo Satelital de Embarcaciones Pesqueras). They reports the
 identity, coordinates, and timestamp of Mexican fishing vessels that comply with
@@ -23,22 +41,38 @@ here and in a Google Cloud Bucket at at: `gs://mex_vms/MEX_VMS/*`. Files follow
 a standard file naming pattern of `MEX_VMS_yyyy_mm.csv`, where `yyyy` indicate\
 the year and `mm` the month.
 
-### L1 and L2 data (recommended)
+L1 columns:
+
+- `src`: Character. Source file - Name of the source file from which the data point was extracted.
+- `name`: Character. Vessel name - Name of the vessel, as reported in the VMS data.
+- `vessel_rnpa`: Character. Vessel RNPA - Unique 8-digit identifier for the vessel.
+- `port`: Character. Port - Port of registration of the vessel, as reported in the VMS data.
+- `economic_unit`: Character. Economic unit - Name of the economic unit (permisionario or concesionario) associated with the vessel, as reported in the VMS data.
+- `datetime`: Timestamp. Date and time - Timestamp of the data point.
+- `lat`: Numeric. Latitude - Latitude of the vessel at the time of the data point.
+- `lon`: Numeric. Longitude - Longitude of the vessel at the time of the data point.
+- `speed`: Numeric. Speed (knots) - Speed of the vessel as reported in the VMS data.
+- `course`: Numeric. Course (degrees) - Course of the vessel as reported in the VMS data.
+- `year`: Numeric. Year - Year of the data point.
+- `month`: Numeric. Month - Month of the data point.
+
+### L2 data (recommended)
 
 On Google BigQuery at `mex-fisheries.mex_vms.mex_vms_latest` for the same data 
-as in the Google Cloud Bucket, some with level of processing with added features
+as in the Google Cloud Bucket, with some level of processing with added features
 (segmentation, spatial covariates) at `mex-fisheries.mex_vms.mex_vms_latest`. Both
 are partitioned by year.
 
 Note that BigQuery data use a standard versioning system every time the tables undergo a major change, like fixing bugs, adding data, or modifying the underlying cleaning code. Past versions include:
 
-- `mex-fisheries.mex_vms.mex_vms_processed_v_20250623` <-- This is the current version, viewed by `mex-fisheries.mex_vms.mex_vms_procssed_latest`
+- `mex-fisheries.mex_vms.mex_vms_processed_v_20260409` <-- This is the current version, viewed by `mex-fisheries.mex_vms.mex_vms_procssed_latest`
+- `mex-fisheries.mex_vms.mex_vms_processed_v_20250623`
 - `mex-fisheries.mex_vms.mex_vms_processed_v_20250613`
 - `mex-fisheries.mex_vms.mex_vms_processed_v_20250319`
 - `mex-fisheries.mex_vms.mex_vms_processed_v_20240615`
 - `mex-fisheries.mex_vms.mex_vms_processed_v_20240515`
 
-Available columns are:
+L2 columns (includes all L1 columns plus derived fields):
 
 - `vessel_rnpa`: Character. Vessel RNPA - Unique 8-digit identifier for the vessel.
 - `name`: Character. Vessel name - Name of the vessel, as reported in the VMS data.
@@ -120,7 +154,11 @@ DESARROLLO RURAL, PESCA Y ALIMENTACION, Estados Unidos Mexicanos; DOF, 24 de
 abril 2008, [citado el 21-04-2021]; Disponible en versión HTML en internet:
 [http://sidof.segob.gob.mx/notas/5033406](http://sidof.segob.gob.mx/notas/5033406)
 
+## License and attribution
 
+This repository is licensed under the [Creative Commons Attribution 4.0 International License (CC BY 4.0)](https://creativecommons.org/licenses/by/4.0/).
+
+The raw data are provided by Mexico's [CONAPESCA](https://www.gob.mx/conapesca) through their [Datos Abiertos portal](https://www.datos.gob.mx/dataset/localizacion_monitoreo_satelital_embarcaciones_pesqueras_2025), licensed under [CC BY 4.0](https://creativecommons.org/licenses/by/4.0/). The data have been modified: column names were standardized, coordinates and dates were parsed into consistent formats, and points falling on land were removed.
 
 
 
