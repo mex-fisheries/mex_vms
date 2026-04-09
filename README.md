@@ -1,6 +1,6 @@
 # Vessel Tracking Data from Mexico's Vessel Monitoring System (VMS)
 
-[![DOI](https://zenodo.org/badge/1046400826.svg)](https://doi.org/10.5281/zenodo.17592443)
+[![DOI](https://zenodo.org/badge/17592443.svg)](https://doi.org/10.5281/zenodo.17592443)
 
 ## Citation
 
@@ -12,9 +12,9 @@ Villaseñor-Derbez, J. C., & Longnecker, A. (2025). mex-fisheries/mex_vms (v0.0.
 @software{villasenor-derbez_2025_mex_vms,
   author       = {Villaseñor-Derbez, Juan Carlos and Longnecker, Aubriana},
   title        = {mex-fisheries/mex\_vms},
-  year         = {2025},
+  year         = {2026},
   publisher    = {Zenodo},
-  version      = {v0.0.1},
+  version      = {v0.0.2},
   doi          = {10.5281/zenodo.17592443},
   url          = {https://doi.org/10.5281/zenodo.17592443}
 }
@@ -139,6 +139,8 @@ mex_vms |>
 - Multiple files (`01-10-FEB-2018.xlsx`, `11-20-FEB-2018.xlsx`, and all August - Dec, 2022) are provided as excel files, instead of csv files.
 - Additionally, file `12. DICIEMBRE/12 - 01 -15 DIC  2022.xlsx` is corrupt. (still corrupt as of March 19, 2025)
 - Three files (`21-31-AGO-2014.csv`, `11-20-ENE-2018.csv`, `16-31 OCT 2020.csv`) have either corrupted or incorrect datetime values in the `Fecha` field.
+- February of 2023 is missing
+- December of 2025 is not yet available
 
 ### Clean data issues
 - For data from `21-31-AGO-2014.csv`, `11-20-ENE-2018.csv`, `16-31 OCT 2020.csv`, there is no datetime available. There is, however, year and month data available, extracted from the file names (included as an `src` variable).
