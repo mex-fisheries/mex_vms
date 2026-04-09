@@ -6,7 +6,7 @@
 
 If you use these data, please cite:
 
-Villaseñor-Derbez, J. C., & Longnecker, A. (2025). mex-fisheries/mex_vms (v0.0.1). Zenodo. https://doi.org/10.5281/zenodo.17592443
+Villaseñor-Derbez, J. C., & Longnecker, A. (2026). mex-fisheries/mex_vms (v0.0.1). Zenodo. https://doi.org/10.5281/zenodo.17592443
 
 ```bibtex
 @software{villasenor-derbez_2025_mex_vms,
