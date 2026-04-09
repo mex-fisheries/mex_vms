@@ -1,4 +1,4 @@
-CREATE OR REPLACE TABLE `mex-fisheries.mex_vms.segment_info_v_20250623`
+CREATE OR REPLACE TABLE `mex-fisheries.mex_vms.segment_info_v_20260409`
 AS
 SELECT
   seg_id,
