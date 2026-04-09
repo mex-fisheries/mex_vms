@@ -27,6 +27,25 @@ pacman::p_load(
 source(here("scripts", "00_setup.R"))
 
 # Define functions -------------------------------------------------------------
+# Parse coordinates that may use comma-as-decimal, dot-decimal, thousands
+# separators, or raw integers (no decimal point at all)
+parse_coord <- function(x) {
+  n_commas <- str_count(x, ",")
+
+  # Standard format: comma-as-decimal (e.g. "22,4202483") or dot-decimal (e.g. "22.42")
+  standard <- as.numeric(str_replace(x, ",", "\\."))
+
+  # Scaling path for raw integers or thousands-separator values
+  stripped <- as.numeric(str_remove_all(x, ","))
+  ndig <- nchar(str_remove_all(x, "[^0-9]"))
+  candidate2 <- stripped / 10 ^ (ndig - 2)
+  candidate3 <- stripped / 10 ^ (ndig - 3)
+  # Prefer 3-digit integer part (for longitudes 100-118), fall back to 2-digit
+  thousands <- ifelse(abs(candidate3) <= 180 & abs(candidate3) >= 1, candidate3, candidate2)
+
+  ifelse(n_commas <= 1 & !is.na(standard) & abs(standard) <= 180, standard, thousands)
+}
+
 # Convert timestmaps to datetimes
 to_datetime <- function(x) {
   # browser()
@@ -122,7 +141,7 @@ clean_vms <- function(data, out_dir = here("data/clean")) {
   out_file <- here(out_dir, paste0("MEX_VMS_", year, "_", month, ".csv"))
   
   if(!file.exists(out_file)) {
-    
+    print(paste("Processing", basename(out_file), "because it was not found in the clean data..."))
     
     # Assign names to each path --------------------------------------------------
     names(data$path) <- data$src
@@ -145,8 +164,8 @@ clean_vms <- function(data, out_dir = here("data/clean")) {
     # Process the data -----------------------------------------------------------
     dt[, `:=` (
       datetime = to_datetime(datetime),
-      lat = round(x = as.numeric(str_replace(lat, ",", "\\.")), digits = 5),
-      lon = round(x = as.numeric(str_replace(lon, ",", "\\.")), digits = 5)
+      lat = round(parse_coord(lat), digits = 5),
+      lon = round(parse_coord(lon), digits = 5)
     )]
     dt[, vessel_rnpa := fix_rnpa(vessel_rnpa)]
     dt$year <- year
